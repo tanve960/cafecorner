@@ -69,17 +69,18 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
 
 /* 1) Paste your Firebase web app config here (Firebase Console > Project settings > Your apps). */
 const firebaseConfig = {
-  apiKey: "PASTE_API_KEY",
-  authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE_PROJECT_ID.appspot.com",
-  messagingSenderId: "PASTE_MESSAGING_SENDER_ID",
-  appId: "PASTE_APP_ID"
+  apiKey: "AIzaSyCPga72odO2c89-sND8KrCU9EEC0pr2uJY",
+  authDomain: "cafe-corner-2d8b8.firebaseapp.com",
+  projectId: "cafe-corner-2d8b8",
+  storageBucket: "cafe-corner-2d8b8.firebasestorage.app",
+  messagingSenderId: "174556828208",
+  appId: "1:174556828208:web:e3556cfc581bc84ebdd3f5",
+  measurementId: "G-D4K2CHS6FK"
 };
+
 const firebaseReady = firebaseConfig.apiKey !== "PASTE_API_KEY" && firebaseConfig.projectId !== "PASTE_PROJECT_ID";
 let db=null, auth=null, unsubscribeOrders=null, filterMode="active";
 if(firebaseReady){const app=initializeApp(firebaseConfig);db=getFirestore(app);auth=getAuth(app);}
-
 const menuData = [
 ["French Fries",[
 ["Salted Fries",59],["Peri Peri Fries",69]]],
