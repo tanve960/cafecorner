@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /orders/{orderId} {
+      // Customers can submit orders without signing in.
+      allow create: if
+        request.resource.data.keys().hasAll([
+          'customerName', 'table', 'items', 'total', 'status', 'createdAtText'
+        ]) &&
+        request.resource.data.customerName is string &&
+        request.resource.data.customerName.size() > 0 &&
+        request.resource.data.customerName.size() <= 45 &&
+        request.resource.data.table is string &&
+        request.resource.data.table.size() > 0 &&
+        request.resource.data.table.size() <= 30 &&
+        request.resource.data.items is list &&
+        request.resource.data.items.size() > 0 &&
+        request.resource.data.total is number &&
+        request.resource.data.total >= 0 &&
+        request.resource.data.status == 'New';
+
+      // Signed-in staff can view, update, and permanently delete orders.
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}
